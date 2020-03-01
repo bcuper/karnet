@@ -10,9 +10,9 @@ class Karnet {
 		$this->_db = DB::conn();
 	}
 
-	public function zapisz($opis, $cena, $rodz, $dzien) {
-		$sql = "INSERT INTO operacje (`opis`, `koszt`, `rodz`, `data`) VALUES ('{$opis}', '{$cena}', '{$rodz}', '{$dzien}')";
-		if ($this->_db->zapytanie($sql)) {
+	public function zapisz($opis, $cena, $rodz, $dzien, $kasjer) {
+		$sql = "INSERT INTO operacje (`opis`, `koszt`, `rodz`, `data`, `kasjer`) VALUES ('{$opis}', '{$cena}', '{$rodz}', '{$dzien}', '{$kasjer}')";
+ 		if ($this->_db->zapytanie($sql)) {
 			Redirect::to('index.php');
 		}
 	}
@@ -33,8 +33,8 @@ class Karnet {
  
 
 	private function operacje() {
-		$sql = "SELECT * FROM operacje";
-		$this->_operacje =  $this->_db->zapytanieAssoc($sql);
+		$sql = "SELECT * FROM operacje LEFT JOIN kasjer on (operacje.kasjer = kasjer.id)";
+ 		$this->_operacje =  $this->_db->zapytanieAssoc($sql);
 	}
 
 	private function kiedyKoniec() {

@@ -1,4 +1,3 @@
-
 <div><a class="btn btn-primary" href="index.php?akcja=dodaj">Dodaj</a></div><br>
 <table class="table table-bordered table-hover table-sm">
 	<tr>
@@ -6,6 +5,7 @@
 		<th>Opis</th>
 		<th>Koszt</th>
 		<th>Data</th>
+                <th>Kasjer</th>
 	</tr>
 	<?php
 
@@ -21,7 +21,8 @@
 		echo '<td>'.($i+1).'</td>';
 		echo '<td>'.$res[$i]->opis.'</td>';
 		echo '<td>'.$res[$i]->rodz.$res[$i]->koszt.'</td>';
-		echo '<td>'.$res[$i]->data.'</td>';
+		echo '<td>'.$res[$i]->data.' ('. Daty::DzienTygodnia($res[$i]->data).')</td>';
+                echo '<td>'.$res[$i]->kasjer.'</td>';
 		echo '</tr>';
 
 		if ($res[$i]->rodz == '+') {
@@ -73,4 +74,4 @@ function dni($koszt) {
 			return " +120 days";
 			break;
 	}
-}
+}								
